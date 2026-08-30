@@ -1,0 +1,141 @@
+\documentclass[main.tex]{subfiles}
+\newcommand{\DiagramaEscala}{0.9}
+\begin{document}
+
+\section{Ecuaciones Diferenciales Parciales}
+
+% --- Diapositiva 1: Definición de derivada parcial ---
+\begin{frame}{Motivación: Derivadas Parciales}
+\small
+Dada una función \( u(x, y) \), la derivada parcial con respecto a \( x \) se define como:
+\[
+\frac{\partial u}{\partial x} = \lim_{\Delta x \to 0} \frac{u(x + \Delta x, y) - u(x, y)}{\Delta x}
+\]
+De forma similar, la derivada parcial con respecto a \( y \) es:
+\[
+\frac{\partial u}{\partial y} = \lim_{\Delta y \to 0} \frac{u(x, y + \Delta y) - u(x, y)}{\Delta y}
+\]
+\end{frame}
+
+% --- Diapositiva 2: ¿Qué es una EDP? ---
+\begin{frame}{¿Qué es una Ecuación Diferencial Parcial (EDP)?}
+\small
+Una EDP es una ecuación que contiene derivadas parciales de una función desconocida de dos o más variables independientes.
+
+\textbf{Ejemplos:}
+\begin{align*}
+\frac{\partial^2 u}{\partial x^2} + x y \frac{\partial^2 u}{\partial y^2} + u &= 1 \\
+\frac{\partial^3 u}{\partial x^2 \partial y} + 8x \frac{\partial u}{\partial y} + 5u &= y \\
+\frac{\partial^2 u}{\partial x^2} + \frac{\partial^3 u}{\partial x \partial y^2} &= 6 \\
+\frac{\partial^2 u}{\partial x^2} + x \frac{\partial u}{\partial x} &= \frac{\partial u}{\partial y}
+\end{align*}
+\end{frame}
+
+% --- Diapositiva 3: Orden y linealidad de una EDP ---
+\begin{frame}{Orden y Linealidad}
+\small
+\textbf{Orden:} Determinado por la derivada de mayor orden presente.
+
+\textbf{Ejemplos:}
+\begin{itemize}
+  \item PT8.3: Orden 2
+  \item PT8.4: Orden 3
+\end{itemize}
+
+\textbf{Linealidad:} Una EDP es lineal si es lineal en \( u \) y sus derivadas, con coeficientes que dependen solo de las variables independientes.
+
+\textbf{Ejemplos:}
+\begin{itemize}
+  \item PT8.3 y PT8.4: lineales
+  \item PT8.5 y PT8.6: no lineales
+\end{itemize}
+\end{frame}
+
+% --- Clasificación de EDPs ---
+\begin{frame}{Clasificación de EDPs de segundo orden}
+\small
+Forma general:
+\[
+A \frac{\partial^2 u}{\partial x^2} + B \frac{\partial^2 u}{\partial x \partial y} + C \frac{\partial^2 u}{\partial y^2} + D = 0
+\]
+\textbf{Clasificación según } \( B^2 - 4AC \):
+\begin{itemize}
+  \item \( < 0 \): Elíptica
+  \item \( = 0 \): Parabólica
+  \item \( > 0 \): Hiperbólica
+\end{itemize}
+\end{frame}
+
+% --- Ejemplos de cada categoría ---
+\begin{frame}{Ejemplos de Clasificación}
+\small
+\begin{itemize}
+  \item Elíptica: \( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} = 0 \)
+  \item Parabólica: \( \frac{\partial T}{\partial t} = k' \frac{\partial^2 T}{\partial x^2} \)
+  \item Hiperbólica: \( \frac{\partial^2 y}{\partial x^2} = \frac{1}{c^2} \frac{\partial^2 y}{\partial t^2} \)
+\end{itemize}
+\end{frame}
+
+% --- Motivación física: placa caliente ---
+\begin{frame}{29.1 La ecuación de Laplace: Motivación Física}
+\small
+Placa rectangular delgada con espesor \(\Delta z\), aislada excepto en los extremos.
+
+Flujo neto de calor en estado estacionario:
+\[
+q(x) \Delta y \Delta z \Delta t + q(y) \Delta x \Delta z \Delta t = q(x + \Delta x) \Delta y \Delta z \Delta t + q(y + \Delta y) \Delta x \Delta z \Delta t
+\]
+Dividiendo entre \( \Delta z \Delta t \) y reorganizando:
+\[
+[q(x) - q(x + \Delta x)] \Delta y + [q(y) - q(y + \Delta y)] \Delta x = 0
+\]
+\end{frame}
+
+% --- De flujo a derivadas ---
+\begin{frame}{Derivadas parciales del flujo}
+\small
+Reescribiendo con cocientes de diferencia:
+\[
+\frac{q(x) - q(x + \Delta x)}{\Delta x} + \frac{q(y) - q(y + \Delta y)}{\Delta y} = 0
+\]
+Tomando el límite cuando \( \Delta x, \Delta y \to 0 \):
+\[
+-\frac{\partial q}{\partial x} - \frac{\partial q}{\partial y} = 0
+\]
+\end{frame}
+
+% --- Ley de Fourier ---
+\begin{frame}{Ley de Fourier del calor}
+\small
+\textbf{Ley de Fourier:} El flujo de calor es proporcional al gradiente de temperatura:
+\[
+q_i = -k \rho C \frac{\partial T}{\partial x_i}
+\]
+\textbf{Definición de conductividad térmica:}
+\[
+k' = k \rho C
+\]
+\textbf{Sustituyendo en la ecuación:}
+\[
+\frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} = 0 \quad \text{(Ecuación de Laplace)}
+\]
+\end{frame}
+
+% --- Ecuación de Poisson ---
+\begin{frame}{Ecuación de Poisson}
+\small
+Si existen fuentes o pérdidas de calor:
+\[
+\frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} = f(x, y)
+\]
+\textbf{f(x,y)} representa las fuentes internas (positiva) o sumideros (negativa) de calor en el dominio.
+
+\textbf{Ecuaciones:}
+\begin{itemize}
+  \item \textbf{Laplace:} sin fuentes internas
+  \item \textbf{Poisson:} con fuentes internas
+\end{itemize}
+\end{frame}
+
+
+\end{document}

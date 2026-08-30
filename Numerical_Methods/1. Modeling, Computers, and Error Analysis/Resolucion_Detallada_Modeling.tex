@@ -1,0 +1,321 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\geometry{margin=2.5cm}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\title{Solución exacta paso a paso de la ecuación diferencial del modelo}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{1. Planteamiento del modelo}
+
+A partir de la segunda ley de Newton para un cuerpo que cae bajo la acción de la gravedad y una fuerza de resistencia proporcional a la velocidad, se obtiene:
+
+\[
+\frac{dv}{dt}=\frac{mg-cv}{m}
+\]
+
+Dividiendo cada término entre la masa \(m\):
+
+\[
+\frac{dv}{dt}=g-\frac{c}{m}v
+\]
+
+Esta es una ecuación diferencial ordinaria de primer orden para la velocidad \(v(t)\):
+
+\[
+\boxed{\frac{dv}{dt}=g-\frac{c}{m}v}
+\]
+
+\begin{tcolorbox}[colback=blue!4,colframe=blue!60!black,title=Datos del modelo]
+\begin{itemize}[leftmargin=*]
+    \item Variable dependiente: \(v(t)\), velocidad del cuerpo.
+    \item Variable independiente: \(t\), tiempo.
+    \item Parámetros: \(m\), masa del cuerpo; \(c\), coeficiente de resistencia.
+    \item Aceleración gravitacional: \(g\).
+\end{itemize}
+\end{tcolorbox}
+
+\section*{2. Organización de la ecuación diferencial}
+
+La ecuación se escribe en forma lineal:
+
+\[
+\frac{dv}{dt}+\frac{c}{m}v=g
+\]
+
+Esta ecuación tiene la forma general:
+
+\[
+\frac{dy}{dx}+P(x)y=Q(x)
+\]
+
+Comparando:
+
+\[
+P(t)=\frac{c}{m}, \qquad Q(t)=g
+\]
+
+Por tanto, puede resolverse mediante el método del factor integrante.
+
+\section*{3. Cálculo del factor integrante}
+
+El factor integrante se define como:
+
+\[
+\mu(t)=e^{\int P(t)\,dt}
+\]
+
+Como \(P(t)=\frac{c}{m}\), entonces:
+
+\[
+\mu(t)=e^{\int \frac{c}{m}\,dt}
+\]
+
+\[
+\mu(t)=e^{\frac{c}{m}t}
+\]
+
+Por lo tanto:
+
+\[
+\boxed{\mu(t)=e^{\frac{c}{m}t}}
+\]
+
+\section*{4. Multiplicación por el factor integrante}
+
+Multiplicamos toda la ecuación diferencial por \(e^{\frac{c}{m}t}\):
+
+\[
+e^{\frac{c}{m}t}\frac{dv}{dt}+\frac{c}{m}e^{\frac{c}{m}t}v=ge^{\frac{c}{m}t}
+\]
+
+El lado izquierdo corresponde a la derivada del producto:
+
+\[
+\frac{d}{dt}\left(v e^{\frac{c}{m}t}\right)=e^{\frac{c}{m}t}\frac{dv}{dt}+\frac{c}{m}e^{\frac{c}{m}t}v
+\]
+
+Por tanto, la ecuación queda:
+
+\[
+\frac{d}{dt}\left(v e^{\frac{c}{m}t}\right)=ge^{\frac{c}{m}t}
+\]
+
+\section*{5. Integración de ambos lados}
+
+Integramos con respecto al tiempo:
+
+\[
+\int \frac{d}{dt}\left(v e^{\frac{c}{m}t}\right)dt=\int ge^{\frac{c}{m}t}dt
+\]
+
+Entonces:
+
+\[
+v e^{\frac{c}{m}t}=g\int e^{\frac{c}{m}t}dt
+\]
+
+Como:
+
+\[
+\int e^{\frac{c}{m}t}dt=\frac{m}{c}e^{\frac{c}{m}t}
+\]
+
+se obtiene:
+
+\[
+v e^{\frac{c}{m}t}=\frac{mg}{c}e^{\frac{c}{m}t}+C
+\]
+
+\section*{6. Despeje de la velocidad}
+
+Dividimos toda la expresión entre \(e^{\frac{c}{m}t}\):
+
+\[
+v(t)=\frac{mg}{c}+Ce^{-\frac{c}{m}t}
+\]
+
+Por tanto, la solución general exacta es:
+
+\[
+\boxed{v(t)=\frac{mg}{c}+Ce^{-\frac{c}{m}t}}
+\]
+
+\section*{7. Aplicación de una condición inicial}
+
+Si se conoce la velocidad inicial del cuerpo:
+
+\[
+v(0)=v_0
+\]
+
+entonces se sustituye \(t=0\) en la solución general:
+
+\[
+v(0)=\frac{mg}{c}+Ce^{-\frac{c}{m}(0)}
+\]
+
+Como \(e^0=1\):
+
+\[
+v_0=\frac{mg}{c}+C
+\]
+
+Despejando \(C\):
+
+\[
+C=v_0-\frac{mg}{c}
+\]
+
+Por tanto, la solución exacta con condición inicial \(v(0)=v_0\) es:
+
+\[
+\boxed{v(t)=\frac{mg}{c}+\left(v_0-\frac{mg}{c}\right)e^{-\frac{c}{m}t}}
+\]
+
+\section*{8. Caso particular: el cuerpo parte del reposo}
+
+Si el cuerpo se suelta desde el reposo, entonces:
+
+\[
+v(0)=0
+\]
+
+Por tanto:
+
+\[
+0=\frac{mg}{c}+C
+\]
+
+\[
+C=-\frac{mg}{c}
+\]
+
+Sustituyendo en la solución general:
+
+\[
+v(t)=\frac{mg}{c}-\frac{mg}{c}e^{-\frac{c}{m}t}
+\]
+
+Factorizando:
+
+\[
+\boxed{v(t)=\frac{mg}{c}\left(1-e^{-\frac{c}{m}t}\right)}
+\]
+
+Esta es la solución exacta para un cuerpo que cae desde el reposo con resistencia lineal del aire.
+
+\section*{9. Interpretación física}
+
+Cuando \(t\to\infty\), se cumple que:
+
+\[
+e^{-\frac{c}{m}t}\to 0
+\]
+
+Entonces:
+
+\[
+\lim_{t\to\infty}v(t)=\frac{mg}{c}
+\]
+
+Por consiguiente, la velocidad terminal del cuerpo es:
+
+\[
+\boxed{v_T=\frac{mg}{c}}
+\]
+
+Esto significa que, después de cierto tiempo, la velocidad deja de aumentar significativamente y se aproxima al valor constante \(\frac{mg}{c}\).
+
+\section*{10. Verificación de la solución}
+
+Tomemos la solución para el caso en que el cuerpo parte del reposo:
+
+\[
+v(t)=\frac{mg}{c}\left(1-e^{-\frac{c}{m}t}\right)
+\]
+
+Derivando:
+
+\[
+\frac{dv}{dt}=\frac{mg}{c}\left(\frac{c}{m}e^{-\frac{c}{m}t}\right)
+\]
+
+\[
+\frac{dv}{dt}=ge^{-\frac{c}{m}t}
+\]
+
+Ahora calculamos el lado derecho de la ecuación diferencial original:
+
+\[
+g-\frac{c}{m}v
+\]
+
+Sustituyendo \(v(t)\):
+
+\[
+g-\frac{c}{m}\left[\frac{mg}{c}\left(1-e^{-\frac{c}{m}t}\right)\right]
+\]
+
+Simplificando:
+
+\[
+g-g\left(1-e^{-\frac{c}{m}t}\right)
+\]
+
+\[
+g-g+ge^{-\frac{c}{m}t}
+\]
+
+\[
+ge^{-\frac{c}{m}t}
+\]
+
+Como:
+
+\[
+\frac{dv}{dt}=ge^{-\frac{c}{m}t}
+\]
+
+y:
+
+\[
+g-\frac{c}{m}v=ge^{-\frac{c}{m}t}
+\]
+
+la solución satisface la ecuación diferencial. Por tanto, queda verificada.
+
+\section*{11. Resultado final}
+
+La solución exacta general es:
+
+\[
+\boxed{v(t)=\frac{mg}{c}+\left(v_0-\frac{mg}{c}\right)e^{-\frac{c}{m}t}}
+\]
+
+Si el cuerpo parte del reposo, la solución exacta es:
+
+\[
+\boxed{v(t)=\frac{mg}{c}\left(1-e^{-\frac{c}{m}t}\right)}
+\]
+
+Y la velocidad terminal es:
+
+\[
+\boxed{v_T=\frac{mg}{c}}
+\]
+
+\end{document}

@@ -1,0 +1,192 @@
+\documentclass[main.tex]{subfiles}
+\newcommand{\DiagramaEscala}{0.9}
+\begin{document}
+
+\section{Optimización}
+
+\begin{frame}{Motivación}
+
+\small
+
+La \textbf{localización de raíces} y la \textbf{optimización} están relacionadas porque ambas requieren
+valores iniciales y la búsqueda de un punto dentro de una función. Sin embargo, su diferencia
+fundamental radica en el objetivo:
+
+\begin{itemize}
+    \item \textbf{Localización de raíces:} busca los ceros de una función, es decir, los valores de $x$ tales que
+    $f(x)=0$.
+    
+    \item \textbf{Optimización:} busca el \textbf{mínimo} o el \textbf{máximo} de una función.
+\end{itemize}
+
+El \textbf{óptimo} corresponde al punto donde la curva es plana, lo cual ocurre cuando
+
+\[
+f'(x)=0
+\]
+
+Además, la segunda derivada permite clasificar el tipo de óptimo:
+
+\[
+f''(x)<0 \Rightarrow \text{máximo},
+\qquad
+f''(x)>0 \Rightarrow \text{mínimo}
+\]
+\end{frame}
+\begin{frame}{Motizacion}
+  Por ello, una estrategia para encontrar un óptimo consiste en derivar la función y luego localizar
+la raíz de la nueva función:
+
+\[
+f'(x)=0
+\]
+
+No obstante, en muchos problemas $f'(x)$ no puede obtenerse analíticamente, por lo que se
+recurre a \textbf{aproximaciones por diferencias finitas} para estimarla.
+
+\medskip
+
+Más allá de verse como un problema de raíces, la optimización posee una \textbf{estructura matemática
+adicional} que la hace, en muchos casos, más manejable, especialmente en problemas
+\textbf{multidimensionales}.
+  
+\end{frame}
+
+
+\begin{frame}{Ejemplo PT4.1: Optimización del costo de un paracaídas}
+
+\small
+
+\textbf{Planteamiento del problema:} Se desea lanzar abastecimientos desde una altura de
+$500\ \text{m}$ usando paracaídas que se abren inmediatamente. El objetivo es determinar
+el \textbf{radio} $r$ y el \textbf{número de paracaídas} $n$ que minimicen el costo total,
+garantizando que la velocidad de impacto no supere el valor crítico
+$v_c = 20\ \text{m/s}$.
+
+\medskip
+
+\textbf{Relaciones geométricas y físicas:}
+\[
+A = 2\pi r^2
+\]
+\[
+l = 2r
+\]
+\[
+c = k_c A
+\]
+\[
+m = \frac{M_t}{n}
+\]
+
+donde:
+\begin{itemize}
+    \item $A$: área de la sección transversal del paracaídas,
+    \item $l$: longitud de cada cuerda,
+    \item $c$: coeficiente de arrastre,
+    \item $m$: masa de cada paquete,
+    \item $M_t$: masa total de la carga,
+    \item $n$: número de paquetes o paracaídas.
+\end{itemize}
+
+\textbf{Costo por paracaídas:}
+\[
+\text{Costo} = c_0 + c_1 l + c_2 A^2
+\]
+
+\textbf{Función objetivo:}
+\[
+\min C = n\left(c_0 + c_1 l + c_2 A^2\right)
+\]
+
+\textbf{Restricciones:}
+\[
+v \leq v_c
+\]
+\[
+n \geq 1, \qquad n \in \mathbb{Z}
+\]
+
+\textbf{Modelo de velocidad del paracaidista:}
+\[
+v(t)=\frac{gm}{c}\left(1-e^{-(c/m)t}\right)
+\]
+
+\textbf{Observación:} La velocidad de impacto depende del tiempo de caída, el cual debe
+obtenerse a partir de la ecuación de posición integrada. Por tanto, este es un
+\textbf{problema de optimización con restricciones no lineales}.
+
+\end{frame}
+
+\begin{frame}{Ejemplo PT4.1: Formulación matemática del problema}
+
+\small
+
+La ecuación de posición permite predecir la altura $z$ en función del tiempo $t$. Sin embargo,
+para este problema no se requiere conocer $z(t)$ de forma explícita, sino determinar el
+\textbf{tiempo de impacto}, es decir, el instante en que el paquete alcanza el suelo.
+
+\medskip
+
+Por tanto, la ecuación de posición se reformula como un \textbf{problema de localización de raíces},
+buscando el valor de $t$ para el cual $z=0$:
+
+\[
+f(t)= -z_0 + \frac{gm}{c}\,t - \frac{gm^2}{c^2}\left(1-e^{-(c/m)t}\right)=0
+\]
+
+Una vez hallado el tiempo de impacto, éste se sustituye en la ecuación de velocidad para obtener
+la \textbf{velocidad de impacto}.
+
+\medskip
+
+\textbf{Planteamiento final del problema de optimización:}
+
+\[
+\min C = n\left(c_0 + c_1 l + c_2 A^2\right)
+\]
+
+sujeto a
+
+\[
+v \leq v_c
+\]
+
+\[
+n \geq 1, \qquad n \in \mathbb{Z}
+\]
+
+donde
+
+\[
+A = 2\pi r^2
+\]
+
+\[
+l = 2r
+\]
+
+\[
+c = k_c A
+\]
+
+\[
+m = \frac{M_t}{n}
+\]
+
+\[
+t:\ \text{raíz de } \;
+-z_0 + \frac{gm}{c}\,t - \frac{gm^2}{c^2}\left(1-e^{-(c/m)t}\right)=0
+\]
+
+\[
+v = \frac{gm}{c}\left(1-e^{-(c/m)t}\right)
+\]
+
+\medskip
+
+Así, el problema consiste en encontrar los valores de $r$ y $n$ que minimicen el costo total,
+garantizando simultáneamente una velocidad de impacto aceptable.
+
+\end{frame}
+\end{document}

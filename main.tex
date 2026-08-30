@@ -1,0 +1,142 @@
+\documentclass[aspectratio=169,dvipsnames,spanish]{beamer}
+
+% --------------------------------------------------
+% Tema corporativo (Metropolis personalizado)
+% --------------------------------------------------
+\input{0-theme/default}
+
+% --------------------------------------------------
+% Idioma y tipografías  (requiere XeLaTeX / LuaLaTeX)
+% --------------------------------------------------
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{chemfig}
+\usepackage[version=4]{mhchem}
+\usepackage{tcolorbox}
+\usepackage{tcolorbox}
+\usepackage{caption}
+\usetikzlibrary{positioning}
+\setmainlanguage{spanish}
+\setotherlanguage{english}
+\usepackage{siunitx}
+\usefonttheme{professionalfonts}
+\setmainfont{Times New Roman} % Cámbiala si lo deseas
+
+\usepackage{siunitx}
+
+% Declaración de unidades adicionales
+\DeclareSIUnit{\calorie}{cal}
+\DeclareSIUnit{\btu}{BTU}
+\DeclareSIUnit{\foot}{ft}
+
+% --------------------------------------------------
+% Codigo python 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{mypython}{
+  language=Python,
+  backgroundcolor=\color{black!5},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{red!60!black},
+  commentstyle=\color{green!50!black},
+  frame=single,
+  rulecolor=\color{black!50},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  tabsize=4,
+  showstringspaces=false
+}
+
+\newtcolorbox{definicionbox}[1][]{colback=blue!5!white,
+  colframe=blue!75!black,
+  title=Definición~\insertdefinitionnumber:~#1,
+  fonttitle=\bfseries,
+  coltitle=black,
+  sharp corners,
+  boxrule=0.8pt
+}
+\newcounter{definition}
+\newcommand{\insertdefinitionnumber}{\arabic{definition}}
+
+% --------------------------------------------------
+% Matemáticas
+% --------------------------------------------------
+\usepackage{mathtools}
+\usepackage{amsthm, amssymb, amsfonts, thmtools, bbm}
+\usepackage{amsmath}
+\newcommand{\arccot}{\mathop{\mathrm{arccot}}}
+\newcommand{\arcsec}{\mathop{\mathrm{arcsec}}}
+% --------------------------------------------------
+% Utilidades de texto y formato
+% --------------------------------------------------
+\usepackage[normalem]{ulem}  % Evita que \emph cambie a subrayado
+\usepackage{csquotes}
+\usepackage{ragged2e}        % \justifying, úsalo con moderación
+\usepackage{multicol}
+\usepackage{comment}
+\usepackage{braket}
+
+% --------------------------------------------------
+% Unidades y notación científica
+% --------------------------------------------------
+\usepackage{siunitx}
+\sisetup{
+  output-decimal-marker = {.},
+  detect-all
+}
+
+% --------------------------------------------------
+% Gráficos y TikZ
+% --------------------------------------------------
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows.meta,
+  shapes,
+  positioning,
+  shadows,
+  shadows.blur,
+  calc
+}
+\usepackage{tikz-3dplot}
+
+% --------------------------------------------------
+% Tablas y organización visual
+% --------------------------------------------------
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+
+% --------------------------------------------------
+% pgfplots
+% --------------------------------------------------
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{colormaps}
+
+% --------------------------------------------------
+% Hipervínculos
+% --------------------------------------------------
+\usepackage{hyperref}
+% --------------------------------------------------
+% subfiles
+% --------------------------------------------------
+\usepackage{subfiles}
+
+
+
+
+
+% --------------------------------------------------
+% Documento
+% --------------------------------------------------
+\begin{document}
+
+\begin{frame}{Hola mundo}
+  ¡Bienvenido a Beamer!
+\end{frame}
+
+\end{document}

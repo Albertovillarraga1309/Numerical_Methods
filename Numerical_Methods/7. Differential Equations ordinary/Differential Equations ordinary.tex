@@ -1,0 +1,798 @@
+\documentclass[main.tex]{subfiles}
+\newcommand{\DiagramaEscala}{0.9}
+\begin{document}
+
+\section{Ecuaciones Diferenciales Ordinarias}
+
+%--------------------------------------------------
+% Diapositiva 1
+%--------------------------------------------------
+%--- Diapositiva: Definici\'on de EDO ---
+\begin{frame}{\small Definici\'on de Ecuaci\'on Diferencial Ordinaria (EDO)}
+\begin{itemize}
+  \item Una \textbf{Ecuaci\'on Diferencial Ordinaria (EDO)} contiene una funci\'on desconocida y sus derivadas respecto a una sola variable independiente.
+  \item Ejemplo (EDO de primer orden):
+  \[
+    \frac{dv}{dt} = \frac{g c}{m} - \frac{c}{m}v
+  \]
+  \item La variable \textbf{dependiente} es $v(t)$ (velocidad), y la \textbf{independiente} es $t$ (tiempo).
+  \item Este tipo de ecuaci\'on se conoce tambi\'en como ecuaci\'on de \emph{raz\'on de cambio}.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Clasificaci\'on por orden ---
+\begin{frame}{\small Clasificaci\'on seg\'un el orden de la EDO}
+\begin{itemize}
+  \item El \textbf{orden} de una EDO est\'a determinado por la derivada de mayor orden presente.
+  \item Ejemplo de \textbf{primer orden}: \( \frac{dv}{dt} = \cdots \)
+  \item Ejemplo de \textbf{segundo orden}:
+  \[
+    m \frac{d^2x}{dt^2} + c \frac{dx}{dt} + kx = 0
+  \]
+  \item Este tipo de ecuaci\'on representa un sistema masa-resorte con amortiguamiento.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Reducci\'on a sistema de primer orden ---
+\begin{frame}{\small Reducci\'on de EDO de segundo orden a sistema de primer orden}
+\begin{itemize}
+  \item Se define una nueva variable auxiliar:
+  \[
+    y = \frac{dx}{dt}
+  \]
+  \item Derivando:
+  \[
+    \frac{dy}{dt} = \frac{d^2x}{dt^2}
+  \]
+  \item Sustituyendo en la ecuaci\'on original:
+  \[
+    m \frac{dy}{dt} + c y + k x = 0
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Sistema equivalente ---
+\begin{frame}{\small Sistema de ecuaciones equivalentes de primer orden}
+\begin{align*}
+  \frac{dx}{dt} &= y \\
+  \frac{dy}{dt} &= -\frac{c}{m} y - \frac{k}{m} x
+\end{align*}
+\begin{itemize}
+  \item Estas dos ecuaciones forman un sistema de primer orden equivalente a la EDO de segundo orden original.
+  \item Este m\'etodo es muy utilizado para resolver num\'ericamente EDOs de orden superior.
+\end{itemize}
+\end{frame}
+
+
+%--- Diapositiva: Resoluci\'on anal\'itica sin computadora ---
+\begin{frame}{\small Resoluci\'on de EDO sin computadora}
+\begin{itemize}
+  \item Algunas EDO pueden resolverse por \textbf{integraci\'on anal\'itica}:
+  \[
+    dv = \left(\frac{gc}{m} - \frac{c}{m}v\right)dt
+  \]
+  \item Integrando ambos lados (integral indefinida):
+  \[
+    \int dv = \int \left(\frac{gc}{m} - \frac{c}{m}v\right) dt
+  \]
+  \item Esta t\'ecnica solo es posible si la integral puede resolverse exactamente.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Soluci\'on del paracaidista ---
+\begin{frame}{\small Soluci\'on anal\'itica del paracaidista}
+\begin{itemize}
+  \item Para el problema del paracaidista (con $v=0$ en $t=0$):
+  \[
+    v(t) = \frac{gm}{c}(1 - e^{-\frac{c}{m}t})
+  \]
+  \item Esta es una \textbf{soluci\'on exacta} que se obtiene al resolver la integral anal\'itica.
+  \item Sin embargo, no todas las EDO tienen soluciones anal\'iticas.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Linealizaci\'on ---
+\begin{frame}{\small Linealizaci\'on de EDO no lineales}
+\begin{itemize}
+  \item Las EDO lineales tienen la forma:
+  \[
+    a_n(x) y^{(n)} + \dots + a_1(x) y' + a_0(x) y = f(x)
+  \]
+  \item Son m\'as f\'aciles de resolver anal\'iticamente.
+  \item Las EDO no lineales frecuentemente se \textbf{linealizan} para su estudio.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo del p\'endulo ---
+\begin{frame}{\small Ejemplo: Movimiento de un p\'endulo}
+\begin{itemize}
+  \item EDO original (no lineal):
+  \[
+    \frac{d^2\theta}{dt^2} + \frac{g}{l} \sin\theta = 0
+  \]
+  \item Para peque\~nos \( \theta \):
+  \[
+    \sin\theta \approx \theta \quad \Rightarrow \quad \frac{d^2\theta}{dt^2} + \frac{g}{l} \theta = 0
+  \]
+  \item Resultado: EDO lineal que puede resolverse anal\'iticamente.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Limitaciones de la linealizaci\'on ---
+\begin{frame}{\small Limitaciones de la linealizaci\'on}
+\begin{itemize}
+  \item Linealizaci\'on solo es v\'alida para \textbf{peque\~nos desplazamientos} o simplificaciones.
+  \item Para situaciones m\'as realistas (grandes desplazamientos):
+  \begin{itemize}
+    \item No es aplicable.
+    \item Se requieren \textbf{m\'etodos num\'ericos}.
+  \end{itemize}
+  \item Las computadoras modernas permiten resolver EDOs complejas sin recurrir a simplificaciones.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Introducci\'on a los m\'etodos de Runge-Kutta ---
+\begin{frame}{\small M\'etodos de Runge-Kutta}
+\begin{itemize}
+  \item Consideramos EDO de la forma:
+  \[
+    \frac{dy}{dx} = f(x, y)
+  \]
+  \item Todos los m\'etodos de un paso siguen la estructura:
+  \[
+    y_{i+1} = y_i + \phi h
+  \]
+  \item Lo que var\'ia es \textbf{c\'omo se estima la pendiente} $\phi$.
+  \item El m\'etodo m\'as simple es el \textbf{m\'etodo de Euler}.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: M\'etodo de Euler ---
+\begin{frame}{\small M\'etodo de Euler}
+\begin{itemize}
+  \item Se estima la pendiente en $x_i$:
+  \[
+    \phi = f(x_i, y_i)
+  \]
+  \item Se aplica:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i) h
+  \]
+  \item Es un m\'etodo simple pero con errores relativamente altos si $h$ no es peque\~no.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.1 (Paso 1) ---
+\begin{frame}{\small Ejemplo 1 - Paso 1}
+\textbf{EDO:}
+\[
+  \frac{dy}{dx} = -2x^3 + 12x^2 - 20x + 8.5
+\]
+\textbf{Condiciones:}
+\begin{itemize}
+  \item $x=0$ a $x=4$ con $h=0.5$
+  \item $y(0)=1$
+\end{itemize}
+\textbf{Paso 1:}
+\begin{align*}
+  f(0,1) &= -2(0)^3 + 12(0)^2 - 20(0) + 8.5 = 8.5 \\
+  y(0.5) &= 1.0 + 8.5(0.5) = 5.25
+\end{align*}
+\textbf{Valor exacto:} $y(0.5) = 3.21875$ \hfill \textbf{Error:} $-2.03125$
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.1 (Paso 2) ---
+\begin{frame}{\small  - Paso 2}
+\textbf{Paso 2:}
+\begin{align*}
+  f(0.5, 5.25) &= -2(0.5)^3 + 12(0.5)^2 - 20(0.5) + 8.5 \\
+  &= -0.25 + 3 -10 + 8.5 = 1.25 \\
+  y(1) &= 5.25 + 0.5(1.25) = 5.875
+\end{align*}
+\textbf{Valor exacto:} $y(1) = 3.000$ \hfill \textbf{Error:} $-2.875$
+\end{frame}
+
+%--- Diapositiva: Tabla resumen del ejemplo ---
+\begin{frame}{\small Resumen del Ejemplo 1}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$x$ & $y_{\text{exacto}}$ & $y_{\text{Euler}}$ & Error \% \\
+\hline
+0.0 & 1.00000 & 1.00000 & 0.0 \\
+0.5 & 3.21875 & 5.25000 & -63.1 \\
+1.0 & 3.00000 & 5.87500 & -95.8 \\
+1.5 & 2.21875 & 5.12500 & 131.0 \\
+2.0 & 2.00000 & 4.50000 & -125.0 \\
+2.5 & 2.71875 & 4.75000 & -74.7 \\
+3.0 & 4.00000 & 5.87500 & 46.9 \\
+3.5 & 4.71875 & 7.12500 & -51.0 \\
+4.0 & 3.00000 & 7.00000 & -133.3 \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+%--- Diapositiva: An\'alisis del error del m\'etodo de Euler ---
+\begin{frame}{\small An\'alisis del Error del M\'etodo de Euler}
+\begin{itemize}
+  \item Existen dos tipos de errores en la soluci\'on num\'erica de EDO:
+  \begin{itemize}
+    \item \textbf{Errores de truncamiento (discretizaci\'on)}.
+    \item \textbf{Errores de redondeo (precisi\'on finita)}.
+  \end{itemize}
+  \item El \textbf{error de truncamiento local} es el error cometido en un solo paso.
+  \item El \textbf{error global} es la suma del error local y los errores propagados de pasos anteriores.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Desarrollo con Serie de Taylor ---
+\begin{frame}{\small Desarrollo con Serie de Taylor}
+\begin{itemize}
+  \item Sea \( y' = f(x, y) \)
+  \item Expansi\'on de Taylor:
+  \[
+    y_{i+1} = y_i + y'_i h + \frac{y''_i}{2!}h^2 + \dots + \frac{y^{(n)}_i}{n!}h^n + R_n
+  \]
+  \item Sustituyendo derivadas sucesivas de $f$:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i)h + \frac{f'(x_i, y_i)}{2!}h^2 + \dots + O(h^{n+1})
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Error de truncamiento local ---
+\begin{frame}{\small Error de Truncamiento Local}
+\begin{itemize}
+  \item El m\'etodo de Euler utiliza:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i)h
+  \]
+  \item Comparado con la serie de Taylor:
+  \[
+    E_t = \frac{f'(x_i, y_i)}{2!}h^2 + O(h^3)
+  \]
+  \item Entonces, el error local es:
+  \[
+    E_a = O(h^2)
+  \]
+  \item \textbf{Conclusi\'on:} Reducir el paso $h$ reduce r\'apidamente el error local.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.2 - Estimaci\'on del Error ---
+\begin{frame}{\small Ejemplo 25.2 - Estimaci\'on del Error de Euler}
+\begin{itemize}
+  \item EDO: \( \frac{dy}{dx} = -2x^3 + 12x^2 - 20x + 8.5 \)
+  \item Derivadas necesarias:
+  \begin{align*}
+    f'(x) &= -6x^2 + 24x - 20 \\
+    f''(x) &= -12x + 24 \\
+    f^{(3)}(x) &= -12
+  \end{align*}
+  \item Evaluamos en $x=0$ con $h=0.5$:
+  \begin{align*}
+    E_{t,2} &= \frac{f'(0)}{2!} h^2 = \frac{-20}{2} (0.5)^2 = -2.5 \\
+    E_{t,3} &= \frac{f''(0)}{3!} h^3 = \frac{24}{6} (0.5)^3 = 0.5 \\
+    E_{t,4} &= \frac{f^{(3)}(0)}{4!} h^4 = \frac{-12}{24} (0.5)^4 = -0.03125
+  \end{align*}
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Resultado del Error Total ---
+\begin{frame}{\small Resultado del Error Total en el Paso 1}
+\begin{itemize}
+  \item Suma de errores de truncamiento:
+  \[
+    E_t = -2.5 + 0.5 - 0.03125 = -2.03125
+  \]
+  \item Coincide exactamente con el error obtenido en el Ejemplo 25.1 para $x=0.5$.
+  \item \textbf{Conclusi\'on:} El error de orden 2 es dominante: $|E_{t,2}| > |E_{t,3}| > |E_{t,4}|$.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Limitaciones del An\'alisis de Error con Taylor ---
+\begin{frame}{\small Limitaciones del An\'alisis de Error con Taylor}
+\begin{itemize}
+  \item La serie de Taylor solo estima el \textbf{error de truncamiento local}.
+  \item No proporciona el \textbf{error global} (acumulado por varios pasos).
+  \item En problemas reales:
+  \begin{itemize}
+    \item Las soluciones exactas no se conocen.
+    \item Las derivadas requeridas pueden ser complicadas o no anal\'iticas.
+  \end{itemize}
+  \item Aun con estas limitaciones, Taylor ayuda a entender el comportamiento de los m\'etodos.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Conclusiones sobre el Error del M\'etodo de Euler ---
+\begin{frame}{\small Conclusiones sobre el Error del M\'etodo de Euler}
+\begin{itemize}
+  \item El \textbf{error local} es proporcional a $h^2$, el \textbf{error global} es proporcional a $h$.
+  \item Disminuir el tama\~no de paso $h$ reduce ambos errores.
+  \item El m\'etodo de Euler es exacto si la soluci\'on es una funci\'on \textbf{lineal}.
+  \item En general, el m\'etodo de Euler es un \textbf{m\'etodo de primer orden}.
+  \item Los m\'etodos de orden $n$ son exactos para polinomios de grado $n$.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: An\'alisis del error del m\'etodo de Euler ---
+\begin{frame}{\small An\'alisis del Error del M\'etodo de Euler}
+\begin{itemize}
+  \item Existen dos tipos de errores en la soluci\'on num\'erica de EDO:
+  \begin{itemize}
+    \item \textbf{Errores de truncamiento (discretizaci\'on)}.
+    \item \textbf{Errores de redondeo (precisi\'on finita)}.
+  \end{itemize}
+  \item El \textbf{error de truncamiento local} es el error cometido en un solo paso.
+  \item El \textbf{error global} es la suma del error local y los errores propagados de pasos anteriores.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Desarrollo con Serie de Taylor ---
+\begin{frame}{\small Desarrollo con Serie de Taylor}
+\begin{itemize}
+  \item Sea \( y' = f(x, y) \)
+  \item Expansi\'on de Taylor:
+  \[
+    y_{i+1} = y_i + y'_i h + \frac{y''_i}{2!}h^2 + \dots + \frac{y^{(n)}_i}{n!}h^n + R_n
+  \]
+  \item Sustituyendo derivadas sucesivas de $f$:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i)h + \frac{f'(x_i, y_i)}{2!}h^2 + \dots + O(h^{n+1})
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Error de truncamiento local ---
+\begin{frame}{\small Error de Truncamiento Local}
+\begin{itemize}
+  \item El m\'etodo de Euler utiliza:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i)h
+  \]
+  \item Comparado con la serie de Taylor:
+  \[
+    E_t = \frac{f'(x_i, y_i)}{2!}h^2 + O(h^3)
+  \]
+  \item Entonces, el error local es:
+  \[
+    E_a = O(h^2)
+  \]
+  \item \textbf{Conclusi\'on:} Reducir el paso $h$ reduce r\'apidamente el error local.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.2 - Estimaci\'on del Error ---
+\begin{frame}{\small Ejemplo 25.2 - Estimaci\'on del Error de Euler}
+\begin{itemize}
+  \item EDO: \( \frac{dy}{dx} = -2x^3 + 12x^2 - 20x + 8.5 \)
+  \item Derivadas necesarias:
+  \begin{align*}
+    f'(x) &= -6x^2 + 24x - 20 \\
+    f''(x) &= -12x + 24 \\
+    f^{(3)}(x) &= -12
+  \end{align*}
+  \item Evaluamos en $x=0$ con $h=0.5$:
+  \begin{align*}
+    E_{t,2} &= \frac{f'(0)}{2!} h^2 = \frac{-20}{2} (0.5)^2 = -2.5 \\
+    E_{t,3} &= \frac{f''(0)}{3!} h^3 = \frac{24}{6} (0.5)^3 = 0.5 \\
+    E_{t,4} &= \frac{f^{(3)}(0)}{4!} h^4 = \frac{-12}{24} (0.5)^4 = -0.03125
+  \end{align*}
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Resultado del Error Total ---
+\begin{frame}{\small Resultado del Error Total en el Paso 1}
+\begin{itemize}
+  \item Suma de errores de truncamiento:
+  \[
+    E_t = -2.5 + 0.5 - 0.03125 = -2.03125
+  \]
+  \item Coincide exactamente con el error obtenido en el Ejemplo 25.1 para $x=0.5$.
+  \item \textbf{Conclusi\'on:} El error de orden 2 es dominante: $|E_{t,2}| > |E_{t,3}| > |E_{t,4}|$.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Limitaciones del An\'alisis de Error con Taylor ---
+\begin{frame}{\small Limitaciones del An\'alisis de Error con Taylor}
+\begin{itemize}
+  \item La serie de Taylor solo estima el \textbf{error de truncamiento local}.
+  \item No proporciona el \textbf{error global} (acumulado por varios pasos).
+  \item En problemas reales:
+  \begin{itemize}
+    \item Las soluciones exactas no se conocen.
+    \item Las derivadas requeridas pueden ser complicadas o no anal\'iticas.
+  \end{itemize}
+  \item Aun con estas limitaciones, Taylor ayuda a entender el comportamiento de los m\'etodos.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Conclusiones sobre el Error del M\'etodo de Euler ---
+\begin{frame}{\small Conclusiones sobre el Error del M\'etodo de Euler}
+\begin{itemize}
+  \item El \textbf{error local} es proporcional a $h^2$, el \textbf{error global} es proporcional a $h$.
+  \item Disminuir el tama\~no de paso $h$ reduce ambos errores.
+  \item El m\'etodo de Euler es exacto si la soluci\'on es una funci\'on \textbf{lineal}.
+  \item En general, el m\'etodo de Euler es un \textbf{m\'etodo de primer orden}.
+  \item Los m\'etodos de orden $n$ son exactos para polinomios de grado $n$.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Serie de Taylor de orden superior ---
+\begin{frame}{\small Serie de Taylor de Orden Superior}
+\begin{itemize}
+  \item Se puede mejorar Euler incluyendo t\'erminos de mayor orden:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i) h + \frac{f'(x_i, y_i)}{2!} h^2
+  \]
+  \item El error de truncamiento aproximado ser\'ia:
+  \[
+    E_a = \frac{f''(x_i, y_i)}{3!} h^3
+  \]
+  \item \textbf{Ventaja:} mejora la precisi\'on.
+  \item \textbf{Desventaja:} requiere derivadas m\'as complejas.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Complejidad en derivadas de orden superior ---
+\begin{frame}{\small Complejidad en Derivadas Superiores}
+\begin{itemize}
+  \item Para EDO dependientes de $x$ e $y$, se requiere la regla de la cadena:
+  \[
+    f' = \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y} \cdot \frac{dy}{dx}
+  \]
+  \item La segunda derivada se vuelve m\'as compleja:
+  \[
+    f'' = \frac{\partial^2 f}{\partial x^2} + 2 \frac{\partial^2 f}{\partial x \partial y} \cdot \frac{dy}{dx} + \frac{\partial^2 f}{\partial y^2} \cdot \left( \frac{dy}{dx} \right)^2 + \frac{\partial f}{\partial y} \cdot \frac{d^2y}{dx^2}
+  \]
+  \item Esta complejidad limita la aplicaci\'on de Taylor de orden superior.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Mejoras del m\'etodo de Euler ---
+\begin{frame}{\small Mejoras del M\'etodo de Euler}
+\begin{itemize}
+  \item El error clave en el m\'etodo de Euler proviene de asumir que la pendiente inicial se mantiene constante.
+  \item Se pueden mejorar los resultados usando m\'etodos que consideren la pendiente al final del intervalo.
+  \item Uno de ellos es el \textbf{m\'etodo de Heun}, tambi\'en conocido como \textbf{Euler mejorado}.
+  \item Estos m\'etodos pertenecen a la clase de \textbf{m\'etodos de Runge-Kutta}.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: M\'etodo de Heun (predictor) ---
+\begin{frame}{\small M\'etodo de Heun: Paso Predictor}
+\begin{itemize}
+  \item Calcular la pendiente inicial:
+  \[
+    f(x_i, y_i)
+  \]
+  \item Predecir un valor intermedio:
+  \[
+    y^0_{i+1} = y_i + h f(x_i, y_i)
+  \]
+  \item Este paso es equivalente al m\'etodo de Euler y se conoce como \textbf{predictor}.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: M\'etodo de Heun (corrector) ---
+\begin{frame}{\small M\'etodo de Heun: Paso Corrector}
+\begin{itemize}
+  \item Calcular la pendiente final con la predicci\'on:
+  \[
+    f(x_{i+1}, y^0_{i+1})
+  \]
+  \item Promediar las pendientes:
+  \[
+    f_{\text{prom}} = \frac{f(x_i, y_i) + f(x_{i+1}, y^0_{i+1})}{2}
+  \]
+  \item Calcular el valor corregido:
+  \[
+    y_{i+1} = y_i + h \cdot f_{\text{prom}}
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: M\'etodo de Heun: Interpretaci\'on ---
+\begin{frame}{\small M\'etodo de Heun: Interpretaci\'on}
+\begin{itemize}
+  \item El m\'etodo de Heun es un \textbf{m\'etodo predictor-corrector de un solo paso}.
+  \item Se puede repetir la correcci\'on iterativamente:
+  \[
+    \varepsilon_a = \frac{y^{(j)}_{i+1} - y^{(j-1)}_{i+1}}{y^{(j)}_{i+1}} \cdot 100\%
+  \]
+  \item Iterar hasta que el error relativo aproximado \( \varepsilon_a \) sea menor a una tolerancia predefinida.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.5 - Paso 1 ---
+\begin{frame}{\small Ejemplo 25.5 - Heun, Paso 1}
+\begin{itemize}
+  \item EDO: \( \frac{dy}{dx} = 4e^{0.8x} - 0.5y \), con \( y(0) = 2 \), paso $h=1$.
+  \item Calcular la pendiente inicial: \( f(0, 2) = 4 - 1 = 3 \)
+  \item Paso predictor:
+  \[
+    y^0_1 = 2 + 1 \cdot 3 = 5
+  \]
+  \item Calcular \( f(1, 5) = 4e^{0.8} - 2.5 = 6.402164 \)
+  \item Pendiente promedio:
+  \[
+    f_{prom} = \frac{3 + 6.402164}{2} = 4.701082
+  \]
+  \item Paso corrector:
+  \[
+    y_1 = 2 + 1 \cdot 4.701082 = 6.701082
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.5 - Iteraciones del corrector ---
+\begin{frame}{\small Ejemplo 25.5 - Iteraciones del Corrector}
+\begin{itemize}
+  \item Segunda iteraci\'on:
+  \[
+    f(1, 6.701082) = 3.275811 \Rightarrow y_1^{(2)} = 2 + 1 \cdot \frac{3 + 3.275811}{2} = 6.275811
+  \]
+  \item Tercera iteraci\'on:
+  \[
+    f(1, 6.275811) = 3.382129 \Rightarrow y_1^{(3)} = 2 + \frac{3 + 3.382129}{2} = 6.382129
+  \]
+  \item Iterar hasta que:
+  \[
+    \varepsilon_a = \left| \frac{y_1^{(j)} - y_1^{(j-1)}}{y_1^{(j)}} \right| \cdot 100\% < \text{tolerancia}
+  \]
+  \item Con 15 iteraciones: \( y_1 \approx 6.360865 \) con error \( \approx 2.68\% \).
+\end{itemize}
+\end{frame}
+%--- Diapositiva: Método de Heun para f(x) ---
+\begin{frame}{\small Método de Heun cuando \( f = f(x) \)}
+\begin{itemize}
+  \item Si la EDO es \( \frac{dy}{dx} = f(x) \), no depende de \( y \).
+  \item No se requiere predictor iterativo.
+  \item Se aplica directamente:
+  \[
+    y_{i+1} = y_i + \frac{f(x_i) + f(x_{i+1})}{2} h
+  \]
+  \item Esta es la \textbf{regla del trapecio} aplicada a la integral de la EDO:
+  \[
+    y(x_{i+1}) = y(x_i) + \int_{x_i}^{x_{i+1}} f(x)dx
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Relación con la regla del trapecio ---
+\begin{frame}{\small Relación con la Regla del Trapecio}
+\begin{itemize}
+  \item Partimos de:
+  \[
+    \frac{dy}{dx} = f(x) \Rightarrow y_{i+1} = y_i + \int_{x_i}^{x_{i+1}} f(x) dx
+  \]
+  \item Aplicando la regla del trapecio:
+  \[
+    \int_{x_i}^{x_{i+1}} f(x) dx \approx \frac{f(x_i) + f(x_{i+1})}{2} h
+  \]
+  \item Resulta en:
+  \[
+    y_{i+1} = y_i + \frac{f(x_i) + f(x_{i+1})}{2} h
+  \]
+  \item El error de truncamiento local:
+  \[
+    E_t = -\frac{f''(\xi)}{12} h^3, \quad \xi \in (x_i, x_{i+1})
+  \]
+\end{itemize}
+\end{frame}
+%--- Diapositiva: Métodos de Runge-Kutta ---
+\begin{frame}{\small Métodos de Runge-Kutta}
+\begin{itemize}
+  \item Logran exactitud tipo Taylor sin derivadas de orden superior.
+  \item Todos tienen la forma general:
+  \[
+    y_{i+1} = y_i + f(x_i, y_i, h) \cdot h
+  \]
+  \item Donde la \textbf{función incremento} es una combinación ponderada:
+  \[
+    f = a_1 k_1 + a_2 k_2 + \dots + a_n k_n
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Cálculo de los coeficientes k ---
+\begin{frame}{\small Cálculo de los coeficientes \( k \) en Runge-Kutta}
+\begin{itemize}
+  \item Cada \( k \) representa una evaluación funcional:
+  \begin{align*}
+    k_1 &= f(x_i, y_i) \\
+    k_2 &= f(x_i + p_1 h, y_i + q_{11} k_1 h) \\
+    k_3 &= f(x_i + p_2 h, y_i + q_{21} k_1 h + q_{22} k_2 h) \\
+    \vdots \\
+    k_n &= f(x_i + p_{n-1} h, y_i + \sum q_{n-1,j} k_j h)
+  \end{align*}
+  \item Los valores \( a, p, q \) se eligen para coincidir con la serie de Taylor.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Orden y precisión ---
+\begin{frame}{\small Orden y Precisión de los Métodos RK}
+\begin{itemize}
+  \item RK de orden 1: equivalente al método de Euler.
+  \item RK de orden 2: como el método del punto medio o Heun.
+  \item RK de orden 3 y 4: mayor precisión sin derivadas de orden superior.
+  \item Errores:
+  \begin{itemize}
+    \item Local: \( O(h^{n+1}) \)
+    \item Global: \( O(h^n) \)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+%--- Diapositiva: RK de segundo orden ---
+\begin{frame}{\small Runge-Kutta de Segundo Orden}
+\begin{itemize}
+  \item Fórmula general:
+  \[
+    y_{i+1} = y_i + (a_1 k_1 + a_2 k_2) h
+  \]
+  \item Donde:
+  \[
+    k_1 = f(x_i, y_i), \quad k_2 = f(x_i + p_1 h, y_i + q_{11} k_1 h)
+  \]
+  \item Se elige un valor para una constante (por ejemplo, \( a_2 \)) y se despejan las otras para hacer coincidir con la expansión de Taylor.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Versiones comunes de RK2 ---
+\begin{frame}{\small Versiones comunes de RK de Segundo Orden}
+\begin{itemize}
+  \item \textbf{Heun (}\( a_2 = 1/2 \)): \( a_1 = 1/2,\; p_1 = q_{11} = 1 \)
+  \[
+    y_{i+1} = y_i + \frac{1}{2}(k_1 + k_2) h
+  \]
+  \item \textbf{Punto medio (}\( a_2 = 1 \)): \( a_1 = 0,\; p_1 = q_{11} = 1/2 \)
+  \[
+    y_{i+1} = y_i + k_2 h
+  \]
+  \item \textbf{Ralston (}\( a_2 = 2/3 \)): \( a_1 = 1/3,\; p_1 = q_{11} = 3/4 \)
+  \[
+    y_{i+1} = y_i + \left(\frac{1}{3}k_1 + \frac{2}{3}k_2\right) h
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo 25.6 Punto Medio y Ralston ---
+\begin{frame}{\small Ejemplo 25.6: Comparación de Métodos RK2}
+\textbf{EDO:} \( f(x) = -2x^3 + 12x^2 - 20x + 8.5 \)
+\\
+\textbf{Condición inicial:} \( y(0) = 1 \), \( h = 0.5 \), integrar hasta \( x = 4 \)
+\begin{itemize}
+  \item Punto medio:
+  \[ k_1 = f(0) = 8.5 \quad \Rightarrow \quad k_2 = f(0.25) = 4.21875 \]
+  \[ y_1 = 1 + 4.21875 \cdot 0.5 = 3.109375 \]
+  \item Ralston:
+  \[ k_1 = 8.5 \quad \Rightarrow \quad k_2 = f(0.375) = 2.58203125 \]
+  \[ y_1 = 1 + \left(\frac{1}{3}\cdot 8.5 + \frac{2}{3}\cdot 2.58203125\right) \cdot 0.5 \approx 3.2773 \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Resultados Comparativos ---
+\begin{frame}{\small Comparación de Resultados: Tabla 25.3}
+\scriptsize
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $y_{\text{verdadero}}$ & Heun & $\%\varepsilon_t$ & Punto medio & $\%\varepsilon_t$ & Ralston & $\%\varepsilon_t$ \\
+\hline
+0.0 & 1.0000 & 1.0000 & 0 & 1.0000 & 0 & 1.0000 & 0 \\
+0.5 & 3.2188 & 3.4375 & 6.8 & 3.1094 & 3.4 & 3.2773 & 1.8 \\
+1.0 & 3.0000 & 3.3750 & 12.5 & 2.8125 & 6.3 & 3.1016 & 3.4 \\
+1.5 & 2.2188 & 2.6875 & 21.1 & 1.9844 & 10.6 & 2.3477 & 5.8 \\
+2.0 & 2.0000 & 2.5000 & 25.0 & 1.7500 & 12.5 & 2.1406 & 7.0 \\
+2.5 & 2.7188 & 3.1875 & 17.2 & 2.4844 & 8.6 & 2.8555 & 5.0 \\
+3.0 & 4.0000 & 4.3750 & 9.4 & 3.8125 & 4.7 & 4.1172 & 2.9 \\
+3.5 & 4.7188 & 4.9375 & 4.6 & 4.6094 & 2.3 & 4.8008 & 1.7 \\
+4.0 & 3.0000 & 3.0000 & 0 & 3.0000 & 0 & 3.0313 & 1.0 \\
+\hline
+\end{tabular}
+\end{frame}
+
+%--- Diapositiva: RK de tercer orden ---
+\begin{frame}{\small Runge-Kutta de Tercer Orden}
+\begin{itemize}
+  \item Forma común:
+  \[
+    y_{i+1} = y_i + \frac{1}{6}(k_1 + 4k_2 + k_3) h
+  \]
+  \item Donde:
+  \begin{align*}
+    k_1 &= f(x_i, y_i) \\
+    k_2 &= f\left(x_i + \frac{1}{2}h, y_i + \frac{1}{2}k_1 h\right) \\
+    k_3 &= f(x_i + h, y_i - k_1 h + 2 k_2 h)
+  \end{align*}
+  \item Exacto para ecuaciones cúbicas cuando la solución es polinómica de orden ≤ 3.
+  \item Si \( f = f(x) \), equivale a la regla de Simpson 1/3.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: RK de cuarto orden ---
+\begin{frame}{\small Runge-Kutta de Cuarto Orden (Clásico)}
+\begin{itemize}
+  \item Fórmula:
+  \[
+    y_{i+1} = y_i + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4) h
+  \]
+  \item Donde:
+  \begin{align*}
+    k_1 &= f(x_i, y_i) \\
+    k_2 &= f\left(x_i + \frac{h}{2}, y_i + \frac{h}{2}k_1\right) \\
+    k_3 &= f\left(x_i + \frac{h}{2}, y_i + \frac{h}{2}k_2\right) \\
+    k_4 &= f(x_i + h, y_i + h k_3)
+  \end{align*}
+  \item Promedio ponderado de pendientes.
+  \item Similitud con Heun, pero con mayor precisión: \( O(h^5) \) local, \( O(h^4) \) global.
+\end{itemize}
+\end{frame}
+%--- Diapositiva: Ejemplo RK4 clásico ---
+\begin{frame}{\small Ejemplo RK4 clásico: Caso (a)}
+\textbf{EDO:} \( f(x, y) = -2x^3 + 12x^2 - 20x + 8.5 \),\quad \( h = 0.5,\; y(0) = 1 \)
+\begin{itemize}
+  \item \( k_1 = f(0,1) = 8.5 \)
+  \item \( k_2 = f(0.25, 2.125) = 4.21875 \)
+  \item \( k_3 = f(0.25, 2.0546875) = 4.21875 \)
+  \item \( k_4 = f(0.5, 3.0546875) = 1.25 \)
+  \item Resultado:
+  \[
+    y(0.5) = 1 + \frac{1}{6}(8.5 + 2\cdot4.21875 + 2\cdot4.21875 + 1.25)(0.5) = 3.21875
+  \]
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: Ejemplo RK4 clásico: Caso (b) ---
+\begin{frame}{\small Ejemplo RK4 clásico: Caso (b)}
+\textbf{EDO:} \( f(x, y) = 4e^{0.8x} - 0.5y \),\quad \( h = 0.5,\; y(0) = 2 \)
+\begin{itemize}
+  \item \( k_1 = 4e^{0} - 0.5(2) = 3 \)
+  \item \( k_2 = 4e^{0.2} - 0.5(2.75) = 3.510611 \)
+  \item \( k_3 = 4e^{0.2} - 0.5(2.877653) = 3.446785 \)
+  \item \( k_4 = 4e^{0.5} - 0.5(3.723392) = 4.105603 \)
+  \item Resultado:
+  \[
+    y(0.5) = 2 + \frac{1}{6}(3 + 2\cdot3.510611 + 2\cdot3.446785 + 4.105603)(0.5) = 3.751669
+  \]
+\end{itemize}
+\end{frame}
+%--- Diapositiva: RK de cuarto orden ---
+\begin{frame}{\small Runge-Kutta de Cuarto Orden (Clásico)}
+\begin{itemize}
+  \item Fórmula:
+  \[
+    y_{i+1} = y_i + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4) h
+  \]
+  \item Donde:
+  \begin{align*}
+    k_1 &= f(x_i, y_i) \\
+    k_2 &= f\left(x_i + \frac{h}{2}, y_i + \frac{h}{2}k_1\right) \\
+    k_3 &= f\left(x_i + \frac{h}{2}, y_i + \frac{h}{2}k_2\right) \\
+    k_4 &= f(x_i + h, y_i + h k_3)
+  \end{align*}
+  \item Promedio ponderado de pendientes.
+  \item Similitud con Heun, pero con mayor precisión: \( O(h^5) \) local, \( O(h^4) \) global.
+\end{itemize}
+\end{frame}
+
+%--- Diapositiva: RK de quinto orden de Butcher ---
+\begin{frame}{\small Runge-Kutta de Quinto Orden (Butcher)}
+\begin{itemize}
+  \item Fórmula:
+  \[
+    y_{i+1} = y_i + \frac{1}{90}(7k_1 + 32k_3 + 12k_4 + 32k_5 + 7k_6) h
+  \]
+  \item Coeficientes:
+  \begin{align*}
+    k_1 &= f(x_i, y_i) \\
+    k_2 &= f\left(x_i + \frac{1}{4}h, y_i + \frac{1}{4}k_1 h\right) \\
+    k_3 &= f\left(x_i + \frac{1}{4}h, y_i + \frac{1}{8}k_1 h + \frac{1}{8}k_2 h\right) \\
+    k_4 &= f\left(x_i + \frac{1}{2}h, y_i - \frac{1}{2}k_2 h + k_3 h\right) \\
+    k_5 &= f\left(x_i + \frac{3}{4}h, y_i + \frac{3}{16}k_1 h + \frac{9}{16}k_4 h\right) \\
+    k_6 &= f\left(x_i + h, y_i - \frac{3}{7}k_1 h + \frac{2}{7}k_2 h + \frac{12}{7}k_3 h - \frac{12}{7}k_4 h + \frac{8}{7}k_5 h\right)
+  \end{align*}
+  \item Mayor precisión pero con más evaluaciones de la función.
+\end{itemize}
+\end{frame}
+\end{document}
