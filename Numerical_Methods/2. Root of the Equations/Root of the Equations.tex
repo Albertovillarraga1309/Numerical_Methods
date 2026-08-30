@@ -142,27 +142,20 @@ f(x)=ax^2+bx+c=0
 \begin{frame}{Ejemplo 1: Método Gráfico}
 
 \textbf{Problema:}
-
 Determinar el coeficiente de resistencia \(c\) para que un paracaidista de masa
-
-\[
+\(
 m=68.1\,\text{kg}
-\]
-
+\)
 alcance una velocidad de
-
-\[
+\(
 v=40\,\text{m/s}
-\]
-
+\)
 después de
-
-\[
+\(
 t=10\,\text{s}.
-\]
+\)
 
 \vspace{0.3cm}
-
 La ecuación que debe resolverse es:
 
 \[
@@ -208,23 +201,17 @@ Se evalúa \(f(c)\) para diferentes valores:
 \end{center}
 
 \begin{itemize}
-
     \item Se observa un cambio de signo entre
-
-    \[
+    \(
     c=12
     \quad\text{y}\quad
     c=16.
-    \]
-
+    \)
     \item Por tanto, existe una raíz en ese intervalo.
-
     \item Gráficamente:
-
     \[
     c\approx14.75.
     \]
-
 \end{itemize}
 
 \end{column}
@@ -299,7 +286,6 @@ Los métodos gráficos tienen una precisión limitada, pero son muy útiles como
 \end{itemize}
 
 Por esta razón, suelen complementar los métodos numéricos utilizados para resolver
-
 \[
 f(x)=0.
 \]
@@ -349,23 +335,16 @@ f(x)=0.
 \begin{column}{0.48\textwidth}
 
 Considere la función:
-
 \[
 f(x)=\sin(10x)+\cos(3x).
 \]
-
 \begin{itemize}
-
     \item Se analiza inicialmente el intervalo:
-
-    \[
+    \(
     0\leq x\leq5.
-    \]
-
+    \)
     \item La gráfica muestra la existencia de múltiples raíces.
-
     \item Algunas raíces están muy próximas entre sí.
-
     \item Por ello puede ser necesario ampliar determinadas regiones de la gráfica.
 
 \end{itemize}
@@ -415,11 +394,7 @@ f(x)=\sin(10x)+\cos(3x).
 
 \begin{frame}{Ampliación de una Región de la Gráfica}
 
-Al ampliar la región cercana a
-
-\[
-x\approx4.2,
-\]
+Al ampliar la región cercana a \(x\approx4.2,\)
 
 se observa que existen dos raíces muy próximas.
 
@@ -480,38 +455,22 @@ x_2\approx4.26359.
 \subsubsection{Método de Bisección}
 
 \begin{frame}{Método de Bisección}
-
 El método de bisección es uno de los métodos cerrados más sencillos para determinar raíces.
-
 \begin{itemize}
-
-    \item Se requiere que \(f(x)\) sea continua en
-
-    \[
-    [x_l,x_u].
-    \]
-
+    \item Se requiere que \(f(x)\) sea continua en\( [x_l,x_u].\)
     \item Los extremos deben cumplir:
-
     \[
     f(x_l)f(x_u)<0.
     \]
-
     \item Esta condición garantiza que existe al menos una raíz dentro del intervalo.
-
     \item En cada iteración el intervalo se divide en dos partes iguales.
-
     \item El intervalo que contiene la raíz se conserva para la siguiente iteración.
-
 \end{itemize}
-
 También se conoce como:
-
 \begin{itemize}
     \item método de corte binario,
     \item método de partición de intervalos.
 \end{itemize}
-
 \end{frame}
 
 
@@ -520,64 +479,40 @@ También se conoce como:
 \begin{frame}{Pasos del Método de Bisección}
 
 \begin{enumerate}
-
-    \item Seleccionar \(x_l\) y \(x_u\) tales que
-
-    \[
-    f(x_l)f(x_u)<0.
-    \]
-
+    \item Seleccionar \(x_l\) y \(x_u\) tales que \(f(x_l)f(x_u)<0.\)
     \item Calcular el punto medio:
-
     \[
     x_r=
     \frac{x_l+x_u}{2}.
     \]
-
     \item Evaluar
-
-    \[
+    \(
     f(x_l)f(x_r).
-    \]
-
+    \)
     \begin{itemize}
-
         \item Si
-
-        \[
+        \(
         f(x_l)f(x_r)<0,
-        \]
-
+        \)
         entonces:
-
         \[
         x_u=x_r.
         \]
-
         \item Si
-
-        \[
+        \(
         f(x_l)f(x_r)>0,
-        \]
-
+        \)
         entonces:
-
         \[
         x_l=x_r.
         \]
-
         \item Si
-
-        \[
+        \(
         f(x_r)=0,
-        \]
-
+        \)
         se ha encontrado la raíz exactamente.
-
     \end{itemize}
-
     \item Repetir el procedimiento hasta alcanzar la precisión deseada.
-
 \end{enumerate}
 
 \end{frame}
@@ -681,9 +616,7 @@ at (axis cs:2.25,0)
 %==================================================
 
 \begin{frame}{Ejemplo 3: Método de Bisección}
-
 Encontrar mediante bisección la raíz de
-
 \[
 f(c)=
 \frac{668.06}{c}
@@ -693,21 +626,13 @@ f(c)=
 -40.
 \]
 
-Del análisis gráfico se obtuvo:
-
-\[
-c_l=12,
-\qquad
-c_u=16.
-\]
+Del análisis gráfico se obtuvo:\(c_l=12,\qquad c_u=16.\)
 
 Además:
 
 \[
 f(12)=6.114>0,
-\]
-
-\[
+\qquad
 f(16)=-2.230<0.
 \]
 
@@ -717,11 +642,7 @@ Por tanto:
 f(12)f(16)<0,
 \]
 
-y existe una raíz en
-
-\[
-[12,16].
-\]
+y existe una raíz en \([12,16].\)
 
 \end{frame}
 
@@ -730,26 +651,15 @@ y existe una raíz en
 
 \begin{frame}{Método de Bisección: Iteración 1}
 
-El primer punto medio es:
+El primer punto medio es: \(c_r=\frac{c_l+c_u}{2}.\)
 
-\[
-c_r=
-\frac{c_l+c_u}{2}.
-\]
-
-Sustituyendo:
-
-\[
-c_r=
-\frac{12+16}{2}
-=14.
-\]
+Sustituyendo:\(c_r=\frac{12+16}{2}=14.\)
 
 Evaluando:
 
-\[
+\(
 f(14)\approx1.611.
-\]
+\)
 
 Como:
 
@@ -764,9 +674,9 @@ la raíz no se encuentra entre \(12\) y \(14\).
 
 Por tanto, el nuevo intervalo es:
 
-\[
+\(
 [14,16].
-\]
+\)
 
 \end{frame}
 
@@ -776,10 +686,9 @@ Por tanto, el nuevo intervalo es:
 \begin{frame}{Error Verdadero: Iteración 1}
 
 Para fines didácticos conocemos que la raíz verdadera es aproximadamente:
-
-\[
+\(
 c^{*}=14.8011.
-\]
+\)
 
 El error relativo porcentual verdadero es:
 
@@ -792,22 +701,16 @@ El error relativo porcentual verdadero es:
 100\%.
 \]
 
-Para
+Para \( c_r=14,\)
 
-\[
-c_r=14,
-\]
-
-se obtiene:
-
-\[
+se obtiene:\(
 \epsilon_t
 =
 \left|
 \frac{14.8011-14}{14.8011}
 \right|
 100\%.
-\]
+\)
 
 Por tanto:
 
@@ -824,44 +727,26 @@ Por tanto:
 
 \begin{frame}{Método de Bisección: Iteración 2}
 
-El nuevo intervalo es:
-
-\[
-[14,16].
-\]
-
+El nuevo intervalo es:\([14,16]. \)
 Calculamos:
-
 \[
 c_r=
 \frac{14+16}{2}
 =15.
 \]
-
 Evaluamos:
-
 \[
 f(14)\approx1.611,
-\]
-
-\[
+\qquad
 f(15)\approx-0.384.
 \]
-
 Por tanto:
-
-\[
+\(
 f(14)f(15)<0.
-\]
+\)
 
-La raíz se encuentra entre:
-
-\[
-14<c<15.
-\]
-
+La raíz se encuentra entre: \(14<c<15.\)
 El nuevo intervalo será:
-
 \[
 [14,15].
 \]
@@ -906,24 +791,19 @@ Por tanto:
 \begin{frame}{Método de Bisección: Iteración 3}
 
 El nuevo intervalo es:
-
-\[
+\(
 [14,15].
-\]
-
+\)
 El punto medio es:
-
 \[
 c_r=
 \frac{14+15}{2}
 =14.5.
 \]
-
 Evaluando:
-
-\[
+\(
 f(14.5)>0.
-\]
+\)
 
 Por tanto, la raíz se encuentra entre:
 
@@ -944,11 +824,9 @@ El nuevo intervalo será:
 
 \begin{frame}{Error Verdadero: Iteración 3}
 
-Para
-
-\[
+Para\(
 c_r=14.5,
-\]
+\)
 
 el error relativo verdadero es:
 
@@ -970,9 +848,7 @@ Por tanto:
 \]
 
 Observe que el error verdadero aumentó con respecto a la iteración anterior.
-
 Esto muestra que:
-
 \[
 \boxed{
 \text{el error verdadero no necesariamente disminuye
@@ -1086,11 +962,9 @@ donde:
 \begin{frame}{Criterio de Paro}
 
 Se establece previamente un error máximo permitido:
-
-\[
+\(
 \epsilon_s.
-\]
-
+\)
 El proceso iterativo se detiene cuando:
 
 \[
@@ -1123,18 +997,13 @@ Este criterio permite aplicar el método sin conocer la raíz verdadera.
 \begin{frame}{Ejemplo 4: Estimación del Error}
 
 Continuaremos el ejemplo anterior hasta alcanzar:
-
-\[
+\(
 \epsilon_s=0.5\%.
-\]
-
+\)
 Las dos primeras aproximaciones fueron:
-
 \[
 c_r^{(1)}=14,
-\]
-
-\[
+\qquad
 c_r^{(2)}=15.
 \]
 
@@ -1170,9 +1039,7 @@ Por tanto:
 c_l=14,
 \qquad
 c_u=15
-\]
-
-\[
+\qquad
 c_r=
 \frac{14+15}{2}
 =14.5
@@ -1189,17 +1056,13 @@ c_r=
 3.448\%.
 \]
 
-\vspace{0.3cm}
-
 \textbf{Iteración 4}
 
 \[
 c_l=14.5,
 \qquad
 c_u=15
-\]
-
-\[
+\qquad
 c_r=
 14.75
 \]
@@ -1229,9 +1092,7 @@ c_r=
 \frac{14.75+15}{2}
 =
 14.875
-\]
-
-\[
+\qquad
 \epsilon_a
 =
 \left|
@@ -1242,7 +1103,6 @@ c_r=
 0.840\%.
 \]
 
-\vspace{0.3cm}
 
 \textbf{Iteración 6}
 
@@ -1251,9 +1111,7 @@ c_r=
 \frac{14.75+14.875}{2}
 =
 14.8125
-\]
-
-\[
+\qquad
 \epsilon_a
 =
 \left|
@@ -1302,22 +1160,16 @@ Iter. &
 \hline
 \end{tabular}
 
-\vspace{0.5cm}
-
 El cálculo se detiene en la iteración 6 porque:
-
 \[
 \epsilon_a=0.422\%<0.5\%.
 \]
-
 La aproximación obtenida es:
-
 \[
 \boxed{
 c\approx14.8125
 }
 \]
-
 \end{frame}
 
 
@@ -1388,14 +1240,9 @@ coordinates {
 Una propiedad fundamental del método de bisección es que el intervalo que contiene la raíz se reduce a la mitad en cada iteración.
 
 Si el intervalo actual es:
-
 \[
 [x_l,x_u],
-\]
-
-el punto medio es:
-
-\[
+\qquad
 x_r=
 \frac{x_l+x_u}{2}.
 \]
@@ -1469,32 +1316,19 @@ Si:
 
 \begin{enumerate}
 
-    \item \(f(x)\) es continua en
-
-    \[
-    [x_l,x_u],
-    \]
-
-    \item y se cumple
-
-    \[
-    f(x_l)f(x_u)<0,
-    \]
+    \item \(f(x)\) es continua en \([x_l,x_u],\)
+    \item y se cumple\(f(x_l)f(x_u)<0, \)
 
 \end{enumerate}
 
 entonces el método mantiene al menos una raíz encerrada dentro del intervalo.
-
 Además:
-
 \[
 \Delta x_n
 =
 \frac{\Delta x_0}{2^n}.
 \]
-
 Por tanto:
-
 \[
 \Delta x_n\rightarrow0
 \qquad
@@ -1502,7 +1336,6 @@ Por tanto:
 \qquad
 n\rightarrow\infty.
 \]
-
 Así, las aproximaciones convergen hacia una raíz contenida en el intervalo inicial.
 
 \end{frame}
@@ -1513,9 +1346,7 @@ Así, las aproximaciones convergen hacia una raíz contenida en el intervalo ini
 %==================================================
 
 \begin{frame}{Expresión del Error Relativo para Bisección}
-
 Como dos puntos medios consecutivos difieren en la mitad del intervalo anterior, puede escribirse:
-
 \[
 \left|
 x_r^{\text{nuevo}}
@@ -1525,17 +1356,13 @@ x_r^{\text{anterior}}
 =
 \frac{x_u-x_l}{2}.
 \]
-
 Además:
-
 \[
 x_r^{\text{nuevo}}
 =
 \frac{x_u+x_l}{2}.
 \]
-
 Por tanto:
-
 \[
 \epsilon_a
 =
@@ -1544,7 +1371,6 @@ Por tanto:
 \right|
 100\%.
 \]
-
 Esta expresión puede utilizarse cuando \(x_u+x_l\neq0\).
 
 \end{frame}
@@ -1556,31 +1382,25 @@ Esta expresión puede utilizarse cuando \(x_u+x_l\neq0\).
 
 \begin{frame}{Número de Iteraciones Requeridas}
 
-Sea el intervalo inicial:
-
-\[
-\Delta x_0
+Sea el intervalo inicial:\(\Delta x_0
 =
 x_u^{(0)}
 -
 x_l^{(0)}.
-\]
+\)
 
-Después de \(n\) divisiones:
-
-\[
+Después de \(n\) divisiones:\(
 \Delta x_n
 =
 \frac{\Delta x_0}{2^n}.
-\]
+\)
 
 Si se desea que el tamaño del intervalo sea menor o igual que un valor especificado:
-
-\[
+\(
 \Delta x_n
 \leq
 E_d,
-\]
+\)
 
 entonces:
 
@@ -1610,20 +1430,11 @@ n
 
 \begin{frame}{Ejemplo: Número de Iteraciones}
 
-Suponga:
-
-\[
+Suponga:\(
 \Delta x_0=4
-\]
-
-y se desea:
-
-\[
+\) y se desea: \(
 E_d=0.0625.
-\]
-
-Entonces:
-
+\) Entonces:
 \[
 n
 \geq
@@ -1631,12 +1442,6 @@ n
 \left(
 \frac{4}{0.0625}
 \right).
-\]
-
-Como:
-
-\[
-\frac{4}{0.0625}=64,
 \]
 
 se obtiene:
@@ -1751,11 +1556,9 @@ Durante la implementación conviene evitar evaluaciones innecesarias de la funci
 
     \item Seleccionar \(x_l\) y \(x_u\).
 
-    \item Verificar:
-
-    \[
+    \item Verificar: \(
     f(x_l)f(x_u)<0.
-    \]
+    \)
 
     \item Calcular:
 
@@ -1785,58 +1588,53 @@ Durante la implementación conviene evitar evaluaciones innecesarias de la funci
 % PYTHON
 %==================================================
 
-\begin{frame}[fragile]{Código Python: Método de Bisección}
+\begin{frame}[fragile]{Código Python: Método de Bisección 1 /2}
 
 \scriptsize
 
 \begin{lstlisting}[style=mypython]
 def biseccion(f, xl, xu, es=0.001, max_iter=100):
-
     fl = f(xl)
     fu = f(xu)
-
     if fl == 0:
         return xl, 0, 0.0
-
     if fu == 0:
         return xu, 0, 0.0
-
     if fl * fu > 0:
         raise ValueError(
-            "El intervalo no encierra una raiz."
-        )
-
+            "El intervalo no encierra una raiz." )
     xr_anterior = None
-
     for i in range(1, max_iter + 1):
-
         xr = (xl + xu) / 2
         fr = f(xr)
-
         if xr_anterior is None:
             ea = None
         elif xr != 0:
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Código Python: Método de Bisección 2 /2}
+
+\scriptsize
+
+\begin{lstlisting}[style=mypython]
             ea = abs(
                 (xr - xr_anterior) / xr
             ) * 100
         else:
             ea = float("inf")
-
         if fr == 0:
             return xr, i, 0.0
-
         if ea is not None and ea < es:
             return xr, i, ea
-
         if fl * fr < 0:
             xu = xr
             fu = fr
         else:
             xl = xr
             fl = fr
-
         xr_anterior = xr
-
     return xr, max_iter, ea
 \end{lstlisting}
 
@@ -1851,24 +1649,11 @@ def biseccion(f, xl, xu, es=0.001, max_iter=100):
 
 \begin{lstlisting}[style=mypython]
 import math
-
-
 def f(c):
-    return (
-        668.06 / c
+    return (668.06 / c
         * (1 - math.exp(-0.146843 * c))
-        - 40
-    )
-
-
-raiz, iteraciones, error = biseccion(
-    f,
-    12,
-    16,
-    es=0.5
-)
-
-
+        - 40)
+raiz, iteraciones, error = biseccion(f,12,16,es=0.5)
 print("Raiz aproximada =", raiz)
 print("Iteraciones =", iteraciones)
 print("Error aproximado =", error, "%")
@@ -1914,21 +1699,6 @@ para el criterio:
 \end{itemize}
 
 \end{frame}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \subsubsection{Método de la Falsa Posición}
 \begin{frame}{Método de la Falsa Posición}
@@ -2065,8 +1835,13 @@ para el criterio:
 
 
 \begin{frame}[fragile]{Pseudocódigo en Python: Falsa Posición}
-\scriptsize
-\begin{lstlisting}[style=mypython]
+
+\begin{lstlisting}[
+    style=mypython,
+    basicstyle=\ttfamily\tiny,
+    aboveskip=0pt,
+    belowskip=0pt
+]
 def falsa_posicion(f, xl, xu, es=0.001, max_iter=100):
     fl, fu = f(xl), f(xu)
     if fl * fu > 0:
@@ -2075,24 +1850,22 @@ def falsa_posicion(f, xl, xu, es=0.001, max_iter=100):
     for i in range(1, max_iter+1):
         xr = xu - fu * (xl - xu) / (fl - fu)
         fr = f(xr)
-
         if i == 1:
             ea = None
         elif xr != 0:
             ea = abs((xr - xr_anterior) / xr) * 100
         else:
             ea = float("inf")
-
         if fr == 0 or (ea is not None and ea < es):
             return xr, i, ea
         if fl * fr < 0:
             xu, fu = xr, fr
         else:
             xl, fl = xr, fr
-
         xr_anterior = xr
     return xr, max_iter, ea
 \end{lstlisting}
+
 \end{frame}
 
 
@@ -4053,8 +3826,7 @@ def secante_modificada(f, x0, d=0.01, es=1e-5, ftol=1e-10, imax=100):
         diferencia = f(x0 + h) - fx
         if abs(diferencia) < 1e-14:
             raise ZeroDivisionError(
-                "Diferencia funcional casi nula"
-            )
+                "Diferencia funcional casi nula")
         x1 = x0 - fx * h / diferencia
         ea = abs(x1 - x0) / max(
             abs(x1), 1e-12
@@ -4590,13 +4362,13 @@ telecomunicaciones y control de respuestas transitorias.
 % ==========================
 \begin{frame}{Caso subamortiguado: raíces complejas}
   Si el discriminante es negativo:
-  \[
+  \(
     a_1^2 - 4 a_2 a_0 < 0,
-  \]
+  \)
   las raíces son complejas conjugadas:
-  \[
+  \(
     r_{1,2} = \lambda \pm \mu i.
-  \]
+  \)
   La solución general puede escribirse inicialmente como:
   \[
     y(t) = c_1 e^{(\lambda + \mu i)t} + c_2 e^{(\lambda - \mu i)t}.
@@ -4645,14 +4417,11 @@ telecomunicaciones y control de respuestas transitorias.
 % ==========================
 % Diapositiva: Cálculos con polinomios
 % ==========================
-\begin{frame}{Cálculos con polinomios}
-  \textbf{Objetivo:} realizar operaciones básicas necesarias para los métodos de búsqueda de raíces.
-
-  \begin{block}{Evaluación eficiente: método de Horner}
-    Polinomio de grado \(n\):
-    \[
+\begin{frame}{Cálculos con polinomios método de Horner}
+  \textbf{Objetivo:} realizar operaciones básicas necesarias para los métodos de búsqueda de raíces, un polinomio de grado \(n\):      
+    \(
       f(x) = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n.
-    \]
+    \)
     \begin{itemize}
       \item Forma directa: requiere \(\dfrac{n(n+1)}{2}\) multiplicaciones.
       \item \textbf{Forma anidada (Horner)}:
@@ -4662,9 +4431,7 @@ telecomunicaciones y control de respuestas transitorias.
       usa solo \(n\) multiplicaciones y \(n\) sumas.
       \item Menos operaciones \(\Rightarrow\) menos error de redondeo.
     \end{itemize}
-  \end{block}
-
-  \begin{block}{Derivada con Horner modificado}
+   \begin{block}{Derivada con Horner modificado}
     Con una ligera modificación del algoritmo de Horner se puede obtener, en el mismo ciclo,
     \(f(x)\) y \(f'(x)\), lo cual es clave, por ejemplo, en el método de Newton-Raphson.
   \end{block}
@@ -4674,16 +4441,12 @@ telecomunicaciones y control de respuestas transitorias.
 % Diapositiva: Deflación polinomial
 % ==========================
 \begin{frame}{Deflación polinomial}
-  \begin{itemize}
-    \item Si se conoce una raíz aproximada \(t\) de un polinomio \(f(x)\), es útil \textbf{“sacarla”} del polinomio.
-    \item Se divide \(f(x)\) entre el factor \((x - t)\) (o un factor cuadrático), reduciendo el grado.
-    \item Esto evita volver a encontrar la misma raíz y simplifica el problema.
-  \end{itemize}
-
+  
+Si se conoce una raíz aproximada \(t\) de un polinomio \(f(x)\), es útil \textbf{“sacarla”} del polinomio. Se divide \(f(x)\) entre el factor \((x - t)\) (o un factor cuadrático), reduciendo el grado. Esto evita volver a encontrar la misma raíz y simplifica el problema.
+ 
   \begin{block}{Idea básica}
     \begin{itemize}
-      \item Representar el polinomio por sus coeficientes.
-      \item Aplicar una forma de \textbf{división sintética}:
+      \item Representar el polinomio por sus coeficientes y aplicar una forma de \textbf{división sintética}:
         \[
           f(x) = (x - t)\,q(x) + r,
         \]
@@ -4724,10 +4487,9 @@ telecomunicaciones y control de respuestas transitorias.
 % Diapositiva 2 – Parábola interpolante y coeficientes
 % ==================================================
 \begin{frame}{Parábola interpolante en el método de Müller}
-  Se plantea una parábola de la forma
-  \[
+  Se plantea una parábola de la forma  \(
     f_2(x) = a(x - x_2)^2 + b(x - x_2) + c
-  \]
+  \)
   que pasa por:
   \[
     (x_0, f(x_0)), \quad (x_1, f(x_1)), \quad (x_2, f(x_2)).
@@ -4780,10 +4542,10 @@ telecomunicaciones y control de respuestas transitorias.
 % Diapositiva 4 – Cálculo de la nueva aproximación
 % ==================================================
 \begin{frame}{Cálculo de la nueva aproximación \(x_3\)}
-  La parábola se escribe como
-  \[
+  La parábola se escribe como: 
+  \(
     f_2(x) = a(x - x_2)^2 + b(x - x_2) + c = 0.
-  \]
+  \)
 
   Aplicando la fórmula cuadrática en la variable \((x - x_2)\):
 
@@ -4836,39 +4598,44 @@ telecomunicaciones y control de respuestas transitorias.
 % ==================================================
 % Diapositiva 6 – Pseudocódigo del método de Müller
 % ==================================================
-\begin{frame}[fragile]{Pseudocódigo del método de Müller}
-  \begin{block}{Müller para raíces (posiblemente reales)}
-\begin{verbatim}
-Dado: xr (estimación inicial), h, eps, maxit
-x2 = xr
-x1 = xr + h*xr
-x0 = xr - h*xr
+\begin{frame}[fragile]{Pseudocódigo en Python: Método de Müller}
 
-REPETIR
-  h0 = x1 - x0
-  h1 = x2 - x1
-  d0 = (f(x1) - f(x0)) / h0
-  d1 = (f(x2) - f(x1)) / h1
+\begin{lstlisting}[
+    style=mypython,
+    basicstyle=\ttfamily\tiny,
+    aboveskip=0pt,
+    belowskip=0pt
+]
+import cmath
+def muller(f, xr, h=0.01, es=0.001, max_iter=100):
+    x2 = xr
+    x1 = xr + h*xr
+    x0 = xr - h*xr
+    for i in range(1, max_iter+1):
+        h0 = x1 - x0
+        h1 = x2 - x1
+        d0 = (f(x1) - f(x0)) / h0
+        d1 = (f(x2) - f(x1)) / h1
+        a = (d1 - d0) / (h1 + h0)
+        b = a*h1 + d1
+        c = f(x2)
+        rad = cmath.sqrt(b*b - 4*a*c)
+        if abs(b + rad) > abs(b - rad):
+            den = b + rad
+        else:
+            den = b - rad
+        dxr = -2*c / den
+        xr = x2 + dxr
+        if abs(xr) != 0:
+            ea = abs(dxr / xr) * 100
+        else:
+            ea = float("inf")
+        if ea < es:
+            return xr, i, ea
+        x0, x1, x2 = x1, x2, xr
+    return xr, max_iter, ea
+\end{lstlisting}
 
-  a = (d1 - d0) / (h1 + h0)
-  b = a*h1 + d1
-  c = f(x2)
-
-  rad = sqrt(b*b - 4*a*c)
-  si |b + rad| > |b - rad|
-      den = b + rad
-    si no
-      den = b - rad
-  fin si
-
-  dxr = -2*c / den
-  xr  = x2 + dxr
-
-  comprobar criterio de paro con dxr
-  actualizar x0, x1, x2 (por ejemplo: x0=x1, x1=x2, x2=xr)
-HASTA converger o alcanzar maxit
-\end{verbatim}
-  \end{block}
 \end{frame}
 
 % ==================================================
@@ -4933,10 +4700,9 @@ HASTA converger o alcanzar maxit
 % Diapositiva 2 – División entre un factor cuadrático
 % =========================================
 \begin{frame}{División entre el factor cuadrático \(x^2 - r x - s\)}
-  Sea
-  \[
+  Sea: \(
     f_n(x) = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n,
-  \]
+  \)
   un polinomio de grado \(n\).
 
   \begin{itemize}
@@ -5030,8 +4796,7 @@ HASTA converger o alcanzar maxit
   Usando las aproximaciones de Taylor y las derivadas parciales, se obtiene el sistema:
   \[
     c_2 \Delta r + c_3 \Delta s = -b_1,
-  \]
-  \[
+ \quad
     c_1 \Delta r + c_2 \Delta s = -b_0.
   \]
 
@@ -5058,14 +4823,13 @@ HASTA converger o alcanzar maxit
 % Diapositiva 6 – Obtención de raíces y deflación
 % =========================================
 \begin{frame}{Obtención de raíces y deflación del polinomio}
-  Una vez que se ha encontrado un factor cuadrático satisfactorio:
-  \[
+  Una vez que se ha encontrado un factor cuadrático satisfactorio:  \(
     x^2 - r x - s,
-  \]
+  \)
   las dos raíces asociadas se calculan mediante:
-  \[
+  \(
     x = \frac{r \pm \sqrt{r^2 + 4s}}{2}.
-  \]
+  \)
 
   \begin{itemize}
     \item Las raíces pueden ser:
