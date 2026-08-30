@@ -1,4 +1,4 @@
-\documentclass[main.tex]{subfiles}
+\documentclass[../../main.tex]{subfiles}
 \newcommand{\DiagramaEscala}{0.9}
 \begin{document}
 
@@ -2071,17 +2071,26 @@ def falsa_posicion(f, xl, xu, es=0.001, max_iter=100):
     fl, fu = f(xl), f(xu)
     if fl * fu > 0:
         raise ValueError("No hay cambio de signo")
+    xr_anterior = None
     for i in range(1, max_iter+1):
         xr = xu - fu * (xl - xu) / (fl - fu)
         fr = f(xr)
-        ea = abs((xr - xu) / xr) * 100 
-        if i > 1 else None
+
+        if i == 1:
+            ea = None
+        elif xr != 0:
+            ea = abs((xr - xr_anterior) / xr) * 100
+        else:
+            ea = float("inf")
+
         if fr == 0 or (ea is not None and ea < es):
             return xr, i, ea
         if fl * fr < 0:
             xu, fu = xr, fr
         else:
             xl, fl = xr, fr
+
+        xr_anterior = xr
     return xr, max_iter, ea
 \end{lstlisting}
 \end{frame}
@@ -2114,7 +2123,7 @@ def falsa_posicion(f, xl, xu, es=0.001, max_iter=100):
     \hline
     It & $x_r$ & $e_a$ (\%) & $e_t$ (\%) \\
     \hline
-    1 & 0.09430 & 90.6 & -- \\
+1 & 0.09430 & -- & 90.6 \\
     2 & 0.18176 & 48.1 & 81.8 \\
     3 & 0.26287 & 30.9 & 73.7 \\
     4 & 0.33811 & 22.3 & 66.2 \\
@@ -2150,12 +2159,19 @@ def falsa_posicion(f, xl, xu, es=0.001, max_iter=100):
 \end{frame}
 
 \begin{frame}[fragile]{Pseudocódigo: Falsa Posición Modificada (1/2)}
-\begin{lstlisting}[style=mypython][basicstyle=\scriptsize\ttfamily, frame=single]
+\begin{lstlisting}[
+  style=mypython,
+  basicstyle=\scriptsize\ttfamily,
+  frame=single
+]
 def falsa_pos_mod(f, xl, xu, es=0.01, imax=50):
     iter = 0
     fl, fu = f(xl), f(xu)
+    if fl * fu > 0:
+        raise ValueError("No hay cambio de signo")
     il, iu = 0, 0
     xr = xl
+    ea = float("inf")
     while True:
         xrold = xr
         xr = xu - fu * (xl - xu) / (fl - fu)
@@ -2163,11 +2179,17 @@ def falsa_pos_mod(f, xl, xu, es=0.01, imax=50):
         iter += 1
         if xr != 0:
             ea = abs((xr - xrold) / xr) * 100
+        else:
+            ea = float("inf")
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Pseudocódigo: Falsa Posición Modificada (2/2)}
-\begin{lstlisting}[style=mypython][basicstyle=\scriptsize\ttfamily, frame=single]
+\begin{lstlisting}[
+  style=mypython,
+  basicstyle=\scriptsize\ttfamily,
+  frame=single
+]
         test = fl * fr
         if test < 0:
             xu, fu = xr, fr
@@ -2206,6 +2228,8 @@ def falsa_pos_mod(f, xl, xu, es=0.01, imax=50):
 \end{itemize}
 \end{frame}
 
+\subsubsection{Iteración de Punto Fijo}
+
 \begin{frame}{Iteración Simple de Punto Fijo: Definición}
 \begin{itemize}
   \item Los métodos abiertos emplean una fórmula para predecir la raíz.
@@ -2219,8 +2243,8 @@ def falsa_pos_mod(f, xl, xu, es=0.01, imax=50):
 
 \begin{frame}{Iteración Simple de Punto Fijo: Ejemplos y Error}
 \begin{itemize}
-  \item Ejemplo algebraico:
-  \[ x^2 - 2x + 3 = 0 \Rightarrow x = \frac{x^2 + 3}{2} \]
+  \item Ejemplo algebraico con una raíz real positiva:
+  \[ x^2 - x - 1 = 0 \Rightarrow x = \sqrt{x+1} \]
   \item Ejemplo trigonométrico:
   \[ \sin(x) = 0 \Rightarrow x = \sin(x) + x \]
   \item Error relativo aproximado:
@@ -2281,7 +2305,9 @@ def falsa_pos_mod(f, xl, xu, es=0.01, imax=50):
 \begin{itemize}
   \item En el ejemplo anterior, el error relativo verdadero es aproximadamente proporcional al de la iteración anterior.
   \item Esta propiedad se conoce como \textbf{convergencia lineal}.
-  \item En iteración de punto fijo, cuando converge, lo hace linealmente: lento pero seguro.
+  \item Si \(0<|g'(x^*)|<1\), la convergencia local es lineal.
+  \item Si \(g'(x^*)=0\), la convergencia puede ser superlineal.
+  \item Los casos \(|g'(x^*)|=1\) requieren un análisis adicional.
   \item También se debe estudiar si el método \textbf{converge o diverge}.
 \end{itemize}
 \end{frame}
@@ -2835,6 +2861,8 @@ Por tanto, las iteraciones divergen de manera oscilatoria.
 % MÉTODO DE NEWTON-RAPHSON: CONCEPTO
 %========================================================
 
+\subsubsection{Método de Newton-Raphson}
+
 \begin{frame}{Método de Newton-Raphson}
 
 \textbf{Concepto:}
@@ -2950,7 +2978,7 @@ convergencia lineal.
 % ANÁLISIS DEL ERROR
 %========================================================
 
-\begin{frame}{Ejemplo 4: Análisis del Error}
+\begin{frame}{Análisis del Error en Newton-Raphson}
 
 \textbf{Problema:}
 Verificar la convergencia cuadrática del método de Newton-Raphson.
@@ -3311,7 +3339,7 @@ def newton_raphson(f, df, x0, tol_x=1e-8,tol_f=1e-8,imax=50):
         x_new = x - f(x) / derivada
         ea = abs(x_new - x) / max(
             abs(x_new), 1e-12
-        )
+        ) * 100
         if ea < tol_x and abs(f(x_new)) < tol_f:
             return x_new, i + 1, ea
         x = x_new
@@ -3347,7 +3375,7 @@ def newton_raphson(f, df, x0, tol_x=1e-8,tol_f=1e-8,imax=50):
 % EJEMPLO DE MALA APROXIMACIÓN INICIAL
 %========================================================
 
-\begin{frame}{Ejemplo : Derivada Pequeña y Salto Inicial}
+\begin{frame}{Ejemplo: Derivada Pequeña y Salto Inicial}
 
 \textbf{Función:}
 \[
@@ -3385,7 +3413,7 @@ x_1
 % ITERACIONES DEL EJEMPLO
 %========================================================
 
-\begin{frame}{Ejemplo : Comportamiento de las Iteraciones}
+\begin{frame}{Ejemplo: Comportamiento de las Iteraciones}
 
 \centering
 
@@ -3477,6 +3505,8 @@ validaciones numéricas y una adecuada selección de \(x_0\).
 % MÉTODO DE LA SECANTE: CONCEPTO
 %========================================================
 
+\subsubsection{Métodos de la Secante}
+
 \begin{frame}{Método de la Secante}
 
 \textbf{Motivación:}
@@ -3518,7 +3548,7 @@ f(x_i)
 % EJEMPLO DEL MÉTODO DE LA SECANTE: PARTE 1
 %========================================================
 
-\begin{frame}{Ejemplo : Método de la Secante}
+\begin{frame}{Ejemplo: Método de la Secante}
 
 \textbf{Función:}
 \(
@@ -3573,7 +3603,7 @@ x_1
 % EJEMPLO DEL MÉTODO DE LA SECANTE: PARTE 2
 %========================================================
 
-\begin{frame}{Ejemplo : Método de la Secante}
+\begin{frame}{Ejemplo: Método de la Secante}
 
 Para la segunda iteración:
 
@@ -3621,7 +3651,7 @@ El error relativo verdadero es:
 % EJEMPLO DEL MÉTODO DE LA SECANTE: PARTE 3
 %========================================================
 
-\begin{frame}{Ejemplo : Método de la Secante}
+\begin{frame}{Ejemplo: Método de la Secante}
 
 Para la tercera iteración:
 \(
@@ -3666,7 +3696,7 @@ El método converge rápidamente sin requerir la derivada de \(f(x)\).
 % TABLA DEL EJEMPLO
 %========================================================
 
-\begin{frame}{Ejemplo 6: Resumen de Iteraciones}
+\begin{frame}{Resumen del Ejemplo de la Secante}
 
 \centering
 \small
@@ -3850,7 +3880,7 @@ pero también puede divergir.
 % EJEMPLO DE COMPARACIÓN
 %========================================================
 
-\begin{frame}{Ejemplo : Comparación de Métodos}
+\begin{frame}{Ejemplo: Comparación de Métodos}
 \textbf{Función:}
 \[
 f(x)=\ln x.
@@ -4121,6 +4151,8 @@ Sin embargo, su comportamiento depende de la selección de \(d\).
 % CIRCUITO RLC: FORMULACIÓN DEL MODELO
 %========================================================
 
+\subsection{Aplicación: Circuito RLC}
+
 \begin{frame}{Dise\~no de un Circuito El\'ectrico}
 
 \textbf{Contexto:}
@@ -4379,6 +4411,8 @@ telecomunicaciones y control de respuestas transitorias.
 % ==========================
 % Diapositiva 1 – Título de sección
 % ==========================
+\subsection{Raíces de Polinomios}
+
 \begin{frame}{Raíces de polinomios}
   \begin{itemize}
     \item En este tema estudiaremos métodos numéricos para encontrar las raíces de ecuaciones polinomiales.
@@ -4660,7 +4694,7 @@ telecomunicaciones y control de respuestas transitorias.
 
   \begin{itemize}
     \item En la práctica numérica: la deflación es sensible a errores de redondeo.
-    \item A veces se “pulEN” las raíces usando de nuevo el polinomio original.
+    \item A veces se “pulen” las raíces usando de nuevo el polinomio original.
   \end{itemize}
 \end{frame}
 
@@ -5088,3 +5122,4 @@ HASTA converger o alcanzar maxit
 
 
 \end{document}
+
